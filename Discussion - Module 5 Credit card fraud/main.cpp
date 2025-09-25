@@ -60,50 +60,22 @@ int main()
         initials[i] = names[i].at(0);
     }
     inputFile.close();
-//    cout << "Names: \t\t Initials:" << endl;
-//    for (int i = 0; i < SIZE; i++)
-//    {
-//        cout << names[i] << "\t\t" << initials[i] << endl;
-//        
-//    }
-    cout << names[0] << names[1] << endl;
-    if (names[0] > names[1])
-    {
-        cout << "names[0] is greater than names[1]" << endl;
-    } else {
-        cout << "False\n";
-        swap(names[0], names[1]);
-    }
-    
-    cout << names[0] << names[1] << endl;
     sort(names, SIZE);
-//        cout << "Sorted Names: \t\t Initials:" << endl;
-//        for (int i = 0; i < SIZE; i++)
-//        {
-//            cout << names[i] << "\t\t" << initials[i] << endl;
-//            
-//        }
+        
     return 0;
 }
 
 void sort( string names[], int size)
 {
-    int minIndex;
-    string minNames;
-    
     for (int i = 0; i < SIZE; i++)
     {
-        minIndex = i;
-        minNames = names[i];
         for (int j = i + 1; j < SIZE; j++)
         {
-            if (names[i] < names[j])
+            if (names[j] < names[i])
             {
-                minNames = names[j];
-                minIndex = i;
+                swap(names[i], names[j]);
             }
         }
-        swap(names[minIndex], names[i]);
     }
 }
 
