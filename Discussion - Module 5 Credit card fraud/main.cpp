@@ -32,11 +32,49 @@
 //
 //  Created by Kristian Mitchell on 9/24/25.
 //
-
+//  Question 2
 #include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return EXIT_SUCCESS;
+// Function Prototypes
+string readNames();
+void outputFunction();
+
+int main()
+{
+    cout << "Running main" << endl;
+    
+    cout << "Calling readNames()" << endl;
+    readNames();
+    
+    cout << "Trying to write now..." << endl;
+    outputFunction();
+    
+    return 0;
+}
+
+string readNames()
+{
+    cout << "readNames(): Starting" << endl;
+    ifstream inputFile;
+    string name;
+    cout << "Opening file" << endl;
+    inputFile.open("names.txt");
+    cout << "Reading name" << endl;
+    inputFile >> name;
+    cout << "Name is: " << endl;
+    cout << name << endl;
+    cout << "done." << endl;
+    return name;
+}
+
+void outputFunction()
+{
+    ofstream outputFile;
+    outputFile.open("demo.txt");
+    
+    outputFile << "Hello";
+    outputFile.close();
 }
