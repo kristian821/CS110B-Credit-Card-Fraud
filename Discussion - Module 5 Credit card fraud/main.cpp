@@ -38,43 +38,80 @@
 #include <string>
 using namespace std;
 
+const int SIZE = 20;
+
 // Function Prototypes
-string readNames();
-void outputFunction();
+void sort(string [], int);
+void swap(string &, string &);
 
 int main()
 {
-    cout << "Running main" << endl;
+    ifstream inputFile;
+    string names[SIZE];
+    char initials[SIZE];
     
-    cout << "Calling readNames()" << endl;
-    readNames();
+    inputFile.open("names.txt");
+    for (int i = 0; i < SIZE; i++)
+    {
+        inputFile >> names[i];
+    }
+    for (int i = 0; i < SIZE; i++)
+    {
+        initials[i] = names[i].at(0);
+    }
+    inputFile.close();
+//    cout << "Names: \t\t Initials:" << endl;
+//    for (int i = 0; i < SIZE; i++)
+//    {
+//        cout << names[i] << "\t\t" << initials[i] << endl;
+//        
+//    }
+    cout << names[0] << names[1] << endl;
+    if (names[0] > names[1])
+    {
+        cout << "names[0] is greater than names[1]" << endl;
+    } else {
+        cout << "False\n";
+        swap(names[0], names[1]);
+    }
     
-    cout << "Trying to write now..." << endl;
-    outputFunction();
-    
+    cout << names[0] << names[1] << endl;
+    sort(names, SIZE);
+//        cout << "Sorted Names: \t\t Initials:" << endl;
+//        for (int i = 0; i < SIZE; i++)
+//        {
+//            cout << names[i] << "\t\t" << initials[i] << endl;
+//            
+//        }
     return 0;
 }
 
-string readNames()
+void sort( string names[], int size)
 {
-    cout << "readNames(): Starting" << endl;
-    ifstream inputFile;
-    string name;
-    cout << "Opening file" << endl;
-    inputFile.open("names.txt");
-    cout << "Reading name" << endl;
-    inputFile >> name;
-    cout << "Name is: " << endl;
-    cout << name << endl;
-    cout << "done." << endl;
-    return name;
+    int minIndex;
+    string minNames;
+    
+    for (int i = 0; i < SIZE; i++)
+    {
+        minIndex = i;
+        minNames = names[i];
+        for (int j = i + 1; j < SIZE; j++)
+        {
+            if (names[i] < names[j])
+            {
+                minNames = names[j];
+                minIndex = i;
+            }
+        }
+        swap(names[minIndex], names[i]);
+    }
 }
 
-void outputFunction()
+void swap(string &a, string &b)
 {
-    ofstream outputFile;
-    outputFile.open("demo.txt");
-    
-    outputFile << "Hello";
-    outputFile.close();
+    string temp = a;
+    a = b;
+    b = temp;
+    return;
 }
+
