@@ -43,25 +43,29 @@ const int SIZE = 20;
 // Function Prototypes
 void sort(string [], int);
 void swap(string &, string &);
+string search(const string [], string, int);
 
 int main()
 {
     ifstream inputFile;
     string names[SIZE];
-    char initials[SIZE];
+    string key;             // what we are searching for
     
     inputFile.open("names.txt");
     for (int i = 0; i < SIZE; i++)
     {
         inputFile >> names[i];
     }
-    for (int i = 0; i < SIZE; i++)
-    {
-        initials[i] = names[i].at(0);
-    }
+    
     inputFile.close();
+    
     sort(names, SIZE);
-        
+    
+    cout << "What is the last name of a customer that is trying to use a credit card?" << endl;
+    cin >> key;
+    
+    cout << search(names, key, SIZE) << endl;
+    
     return 0;
 }
 
@@ -87,3 +91,33 @@ void swap(string &a, string &b)
     return;
 }
 
+string search(const string names[], string key, int size)
+{
+    int first = 0;
+    int last = size - 1;
+    int middle;
+    int position = -1;
+    bool found = false;
+    
+    while (!found && first <= last)
+    {
+        middle = (first + last) / 2;
+        
+        if (names[middle] == key)
+        {
+            found = true;
+            position = middle;
+        } else if (key > names[middle])
+        {
+            first = middle + 1;
+        } else {
+            last = middle - 1;
+        }
+    }
+    if (position > -1)
+    {
+        return "Name is on the fraudster list."
+    } else {
+        return "Name is not on the fraudster list.";
+    }
+}
